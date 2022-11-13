@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33103.184
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dynamic link library", "Dynamic link library\Dynamic link library.csproj", "{8FBCDD4F-AE63-46CE-8D29-ADD95A351877}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dynamic link library", "Dynamic link library\Dynamic link library.csproj", "{8FBCDD4F-AE63-46CE-8D29-ADD95A351877}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyFancyConsoleApp", "ConsoleApp1\MyFancyConsoleApp.csproj", "{A3FB67E9-A390-4333-8012-BD1E3C7B6D5B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlgorithmConsoleApp", "AlgorithmConsoleApp\AlgorithmConsoleApp.csproj", "{11A82FD8-6027-4B40-8DC4-F47233F6DB0F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{8FBCDD4F-AE63-46CE-8D29-ADD95A351877}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8FBCDD4F-AE63-46CE-8D29-ADD95A351877}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8FBCDD4F-AE63-46CE-8D29-ADD95A351877}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A3FB67E9-A390-4333-8012-BD1E3C7B6D5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A3FB67E9-A390-4333-8012-BD1E3C7B6D5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A3FB67E9-A390-4333-8012-BD1E3C7B6D5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A3FB67E9-A390-4333-8012-BD1E3C7B6D5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11A82FD8-6027-4B40-8DC4-F47233F6DB0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11A82FD8-6027-4B40-8DC4-F47233F6DB0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11A82FD8-6027-4B40-8DC4-F47233F6DB0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11A82FD8-6027-4B40-8DC4-F47233F6DB0F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -24,11 +24,11 @@ namespace Dynamic_link_library
             }
             return myArray;
         }
-        public static int[] Prepare(int arraysize)
+        public static int[] Prepare(int arraySize)
         {
-            int[] myArray = new int[arraysize];
-            return Randomize(myArray);
-            //return myArray;
+            int[] myArray = new int[arraySize];
+            myArray = Randomize(myArray);
+            return myArray;
         }
         public static void DisplayRuntime(int[] array, SortedDelegate sortedDelegate)
         {
@@ -47,7 +47,7 @@ namespace Dynamic_link_library
 
         }
 
-        private static void BubbleSort(int[] myArray)
+        public static void BubbleSort(int[] myArray)
         {
             for (int i = 0; i < myArray.Length; i++)
             {
@@ -66,7 +66,7 @@ namespace Dynamic_link_library
         }
 
 
-        private static void SelectionSort(int[] myArray)
+        public static void SelectionSort(int[] myArray)
         {
               
             for (int i = 0; i < myArray.Length - 1; i++)
@@ -83,7 +83,7 @@ namespace Dynamic_link_library
 
             }
         }
-        private static void InsertionSort(int[] myArray)
+        public static void InsertionSort(int[] myArray)
         {
             int j, temp;
             for (int i = 1; i <= myArray.Length - 1; i++)
@@ -99,9 +99,37 @@ namespace Dynamic_link_library
             }
         }
 
-        private static void MergeSort(int[] myArray)
+        public static void MergeSort(int[] myArray, int left, int right)
         {
-
+            int mid;
+            if (right > left)
+            {
+                mid = (right + left) / 2;
+                MergeSort(myArray, left, mid);
+                MergeSort(myArray, (mid + 1), right);
+                Mergemethod(myArray, left, (mid + 1), right);
+            }
+        }
+        public static void Mergemethod(int[] numbers, int left, int mid, int right)
+        {
+            int[] temp = new int[25];    // temp is a temporary array to store result
+            int i, left_end, num_elements, tmp_pos;
+            left_end = (mid - 1);
+            tmp_pos = left;
+            num_elements = (right - left + 1);
+            while ((left <= left_end) && (mid <= right)) //merging when tow halves have unsorted items
+            {
+                if (numbers[left] <= numbers[mid])
+                    temp[tmp_pos++] = numbers[left++];
+                else
+                    temp[tmp_pos++] = numbers[mid++];
+            }
+            while (left <= left_end) temp[tmp_pos++] = numbers[left++]; //remaining items are copied into temp
+            while (mid <= right) temp[tmp_pos++] = numbers[mid++];
+            for (i = 0; i < num_elements; i++)
+            {
+                numbers[right] = temp[right]; right--;
+            }
         }
 
 
