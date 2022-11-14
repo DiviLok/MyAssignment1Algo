@@ -6,6 +6,8 @@ namespace Dynamic_link_library
     public class MyAssignment
     {
         public delegate void SortedDelegate(int[] myArray);
+
+        public delegate void SortedDelegate2(int[] myArray, int x, int y);
         public static void Swap(int[] myArray, int i, int j)
         {
             int temp;
@@ -14,6 +16,8 @@ namespace Dynamic_link_library
             myArray[j] = temp;
 
         }
+        public static void doNothing(int[] myArray) { }
+        public static void doNothing2(int[] myArray, int x, int y) { }
         public static int[] Randomize(int[] myArray)
         {
             Random random = new Random();
@@ -28,22 +32,36 @@ namespace Dynamic_link_library
         {
             int[] myArray = new int[arraySize];
             myArray = Randomize(myArray);
+/*            Console.WriteLine("\n" + myArray.Length);
+            Console.WriteLine("\nGenerated Array:");
+            foreach (int i in myArray)
+            {
+                Console.Write(i + " ");
+            }*/
             return myArray;
         }
-        public static void DisplayRuntime(int[] array, SortedDelegate sortedDelegate)
+        public static void DisplayRuntime(int[] array, SortedDelegate sortedDelegate, SortedDelegate2 sortedDelegate2, string sortType)
         {
 
             Stopwatch sp = new Stopwatch();
-
+            Console.WriteLine("Starting..");
             sp.Start();
-            sortedDelegate(array);
+            if ("InsertionSort SelectionSort BubbleSort".Contains(sortType)) // Choose delegate method based on user input
+            {
+                sortedDelegate(array);
+            }
+            else
+            {
+                sortedDelegate2(array, 0, array.Length - 1);
+            }
+
             sp.Stop();
             TimeSpan ts = sp.Elapsed;
 
             string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
                 ts.Hours, ts.Minutes, ts.Seconds,
                 ts.Milliseconds / 10);
-            Console.WriteLine("RunTime " + elapsedTime);
+            Console.WriteLine("\nRunTime " + elapsedTime);
 
         }
 
@@ -59,16 +77,12 @@ namespace Dynamic_link_library
                     }
                 }
             }
-            Console.WriteLine("Sorted:");
-            foreach (int p in myArray)
-                Console.Write(p + " ");
-            Console.Read();
         }
 
 
         public static void SelectionSort(int[] myArray)
         {
-              
+
             for (int i = 0; i < myArray.Length - 1; i++)
             {
                 int Min = i;
@@ -76,10 +90,10 @@ namespace Dynamic_link_library
                 {
                     if (myArray[Min] > myArray[j])
                     {
-                        Min = j; 
+                        Min = j;
                     }
                 }
-                Swap(myArray,i, Min);   
+                Swap(myArray, i, Min);
 
             }
         }
@@ -109,32 +123,85 @@ namespace Dynamic_link_library
                 MergeSort(myArray, (mid + 1), right);
                 Mergemethod(myArray, left, (mid + 1), right);
             }
+
         }
-        public static void Mergemethod(int[] numbers, int left, int mid, int right)
+        public static void Mergemethod(int[] myArray, int left, int mid, int right)
         {
-            int[] temp = new int[25];    // temp is a temporary array to store result
+            int[] temp = new int[myArray.Length];    // temp is a temporary array to store result
             int i, left_end, num_elements, tmp_pos;
             left_end = (mid - 1);
             tmp_pos = left;
             num_elements = (right - left + 1);
             while ((left <= left_end) && (mid <= right)) //merging when tow halves have unsorted items
             {
-                if (numbers[left] <= numbers[mid])
-                    temp[tmp_pos++] = numbers[left++];
+                if (myArray[left] <= myArray[mid])
+                    temp[tmp_pos++] = myArray[left++];
                 else
-                    temp[tmp_pos++] = numbers[mid++];
+                    temp[tmp_pos++] = myArray[mid++];
             }
-            while (left <= left_end) temp[tmp_pos++] = numbers[left++]; //remaining items are copied into temp
-            while (mid <= right) temp[tmp_pos++] = numbers[mid++];
+            while (left <= left_end) temp[tmp_pos++] = myArray[left++]; //remaining items are copied into temp
+            while (mid <= right) temp[tmp_pos++] = myArray[mid++];
             for (i = 0; i < num_elements; i++)
             {
-                numbers[right] = temp[right]; right--;
+                myArray[right] = temp[right]; right--;
             }
+
         }
+        public static void SortbyLambda(int[] myArray, int x, int y)
+        {
+            Array.Sort(myArray, (x, y) => x.CompareTo(y));
+        }
+        public static int Partition(int[] myArray, int left, int right)
+        {
+
+            int pivot = myArray[left];
+            while (true)
+            {
+                while (myArray[left] < pivot)
+                    left++;
+
+                while (myArray[right] > pivot)
+                    right--;
+                if (left < right)
+                {
+                    Swap(myArray, left, right);
+                }
+                else
+                {
+                    return right;
+                }
+
+            }
+
+        }
+        public static void QuickSort(int[] myArray, int left, int right)
+
+        {
+
+            // For Recusrion  
+
+            if (left < right)
+
+            {
+
+                int pivot = Partition(myArray, left, right);
 
 
 
+                if (pivot > 1)
 
+                    QuickSort(myArray, left, pivot - 1);
+
+
+
+                if (pivot + 1 < right)
+
+                    QuickSort(myArray, pivot + 1, right);
+
+            }
+
+
+        }
 
     }
 }
