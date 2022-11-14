@@ -3,9 +3,9 @@ using System.Diagnostics;
 
 namespace Dynamic_link_library
 {
-    public class MyAssignment
+    public class SortAlgorithms
     {
-        public delegate void SortedDelegate(int[] myArray);
+        public delegate void SortedDelegate1(int[] myArray);
 
         public delegate void SortedDelegate2(int[] myArray, int x, int y);
         public static void Swap(int[] myArray, int i, int j)
@@ -16,8 +16,8 @@ namespace Dynamic_link_library
             myArray[j] = temp;
 
         }
-        public static void doNothing(int[] myArray) { }
-        public static void doNothing2(int[] myArray, int x, int y) { }
+        public static void DoNothing(int[] myArray) { }
+        public static void DoNothing(int[] myArray, int x, int y) { }
         public static int[] Randomize(int[] myArray)
         {
             Random random = new Random();
@@ -40,15 +40,16 @@ namespace Dynamic_link_library
             }*/
             return myArray;
         }
-        public static void DisplayRuntime(int[] array, SortedDelegate sortedDelegate, SortedDelegate2 sortedDelegate2, string sortType)
+        public static void DisplayRuntime(int[] array, SortedDelegate1 sortedDelegate1, SortedDelegate2 sortedDelegate2)
         {
 
             Stopwatch sp = new Stopwatch();
-            Console.WriteLine("Starting..");
+            
             sp.Start();
-            if ("InsertionSort SelectionSort BubbleSort".Contains(sortType)) // Choose delegate method based on user input
+            
+            if ("InsertionSort SelectionSort BubbleSort".Contains(sortedDelegate1.Method.Name)) // Choose delegate method based on user input
             {
-                sortedDelegate(array);
+                sortedDelegate1(array);
             }
             else
             {
