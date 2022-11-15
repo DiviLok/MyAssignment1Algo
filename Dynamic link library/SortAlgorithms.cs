@@ -32,21 +32,15 @@ namespace Dynamic_link_library
         {
             int[] myArray = new int[arraySize];
             myArray = Randomize(myArray);
-/*            Console.WriteLine("\n" + myArray.Length);
-            Console.WriteLine("\nGenerated Array:");
-            foreach (int i in myArray)
-            {
-                Console.Write(i + " ");
-            }*/
             return myArray;
         }
         public static void DisplayRuntime(int[] array, SortedDelegate1 sortedDelegate1, SortedDelegate2 sortedDelegate2)
         {
 
             Stopwatch sp = new Stopwatch();
-            
+
             sp.Start();
-            
+
             if ("InsertionSort SelectionSort BubbleSort".Contains(sortedDelegate1.Method.Name)) // Choose delegate method based on user input
             {
                 sortedDelegate1(array);
@@ -57,12 +51,8 @@ namespace Dynamic_link_library
             }
 
             sp.Stop();
-            TimeSpan ts = sp.Elapsed;
+            Utility.ElapseTime(sp, "RunTime ");
 
-            string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
-                ts.Hours, ts.Minutes, ts.Seconds,
-                ts.Milliseconds / 10);
-            Console.WriteLine("\nRunTime " + elapsedTime);
 
         }
 
