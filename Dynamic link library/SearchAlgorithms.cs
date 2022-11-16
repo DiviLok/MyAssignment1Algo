@@ -53,7 +53,7 @@ namespace Dynamic_link_library
                 Console.WriteLine(searchDele1(array, array[0]));
 
                 sp.Stop();
-                Utility.ElapseTime(sp, "RunTime ");
+                Utility.ElapsedTime(sp, "RunTime ");
 
 
 
@@ -61,7 +61,7 @@ namespace Dynamic_link_library
                 Console.WriteLine(searchDele1(array, array[(array.Length) / 2]));
 
                 sp.Stop();
-                Utility.ElapseTime(sp, "RunTime ");
+                Utility.ElapsedTime(sp, "RunTime ");
 
 
                 sp.Start();
@@ -69,7 +69,7 @@ namespace Dynamic_link_library
                 Console.WriteLine(searchDele1(array, array[array.Length - 1]));
 
                 sp.Stop();
-                Utility.ElapseTime(sp, "RunTime ");
+                Utility.ElapsedTime(sp, "RunTime ");
 
             }
             else
@@ -80,7 +80,7 @@ namespace Dynamic_link_library
                 Console.WriteLine(searchDele2(array, array[0], 0, array.Length - 1));
 
                 sp.Stop();
-                Utility.ElapseTime(sp, "RunTime ");
+                Utility.ElapsedTime(sp, "RunTime ");
 
 
                 sp.Start();
@@ -88,7 +88,7 @@ namespace Dynamic_link_library
                 Console.WriteLine(searchDele2(array, array[(array.Length) / 2], 0, array.Length - 1));
 
                 sp.Stop();
-                Utility.ElapseTime(sp, "RunTime ");
+                Utility.ElapsedTime(sp, "RunTime ");
 
 
 
@@ -98,7 +98,7 @@ namespace Dynamic_link_library
                 Console.WriteLine(searchDele2(array, array[array.Length - 1], 0, array.Length - 1));
 
                 sp.Stop();
-                Utility.ElapseTime(sp, "RunTime ");
+                Utility.ElapsedTime(sp, "RunTime ");
 
 
             }

@@ -9,7 +9,7 @@ namespace Dynamic_link_library
 {
     public class Utility
     {
-        public static void ElapseTime(Stopwatch sp, String msg)
+        public static void ElapsedTime(Stopwatch sp, String msg)
         {
            TimeSpan ts = sp.Elapsed;
 

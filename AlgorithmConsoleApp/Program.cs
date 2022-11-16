@@ -24,14 +24,13 @@ namespace AlgorithmConsoleApp
             switch (choice)
             {
                 case 1:
-                    SearchAlgorithm(myArray);
+                    SearchAlgorithm(myArray); //Calls the Search Algorithms function
                     break;
                 case 2:
-                    SortAlgorithm(myArray);
+                    SortAlgorithm(myArray); // calls the Sorting Algorithms function
                     break;
                case 3:
-                    PerformanceCompareDS(arraySize);
-                    
+                    PerformanceCompareDS(arraySize); // calls the performance compare function which compares performance of all the data structure types
                     break;
 
             }
@@ -50,6 +49,7 @@ namespace AlgorithmConsoleApp
             Console.WriteLine("Enter the size of changes you want to test for compare");
             
             arrayChangeSize = Convert.ToInt32(Console.ReadLine());
+
             pc.AddingElement(arrayChangeSize);
             pc.RemovingElement(arrayChangeSize);
             pc.SearchElement(arrayChangeSize);

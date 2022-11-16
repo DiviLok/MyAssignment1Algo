@@ -51,7 +51,7 @@ namespace Dynamic_link_library
             }
 
             sp.Stop();
-            Utility.ElapseTime(sp, "RunTime ");
+            Utility.ElapsedTime(sp, "RunTime ");
 
 
         }

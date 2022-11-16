@@ -31,7 +31,7 @@ namespace Dynamic_link_library
                 myArray.Append(random2.Next(0, 10 * number));
             }
             sp.Stop();
-            Utility.ElapseTime(sp, "Array Addition");
+            Utility.ElapsedTime(sp, "Array Addition");
 
             sp.Start();
             for (int i = 0; i < number; i++)
@@ -39,7 +39,7 @@ namespace Dynamic_link_library
                 myStack.Push(random2.Next(0, 10 * number));
             }
             sp.Stop();
-            Utility.ElapseTime(sp, "Stack Addition");
+            Utility.ElapsedTime(sp, "Stack Addition");
 
             sp.Start();
             for (int i = 0; i < number; i++)
@@ -47,7 +47,7 @@ namespace Dynamic_link_library
                 myQueue.Enqueue(random2.Next(0, 10 * number));
             }
             sp.Stop();
-            Utility.ElapseTime(sp, "Queue Addition");
+            Utility.ElapsedTime(sp, "Queue Addition");
 
             sp.Start();
             for (int i = 0; i < number; i++)
@@ -55,7 +55,7 @@ namespace Dynamic_link_library
                 myHashSet.Add(random2.Next(0, 10 * number));
             }
             sp.Stop();
-            Utility.ElapseTime(sp, "HashSet Addition");
+            Utility.ElapsedTime(sp, "HashSet Addition");
 
             sp.Start();
             for (int i = 0; i < number; i++)
@@ -63,7 +63,7 @@ namespace Dynamic_link_library
                 myList.Add(random2.Next(0, 10 * number));
             }
             sp.Stop();
-            Utility.ElapseTime(sp, "List Addition");
+            Utility.ElapsedTime(sp, "List Addition");
 
             sp.Start();
             for (int i = 0; i < number; i++)
@@ -71,7 +71,7 @@ namespace Dynamic_link_library
                 myDictionary.Add(myDictionary.Count, random2.Next(0, 10 * number));
             }
             sp.Stop();
-            Utility.ElapseTime(sp, "Dictionary Addition");
+            Utility.ElapsedTime(sp, "Dictionary Addition");
 
             sp.Start();
             for (int i = 0; i < number; i++)
@@ -79,7 +79,7 @@ namespace Dynamic_link_library
                 mySortedDictionary.Add(mySortedDictionary.Count, random2.Next(0, 10 * number));
             }
             sp.Stop();
-            Utility.ElapseTime(sp, "SortedDictionary Addition");
+            Utility.ElapsedTime(sp, "SortedDictionary Addition");
 
         }
         public void RemovingElement(int number)
@@ -91,7 +91,7 @@ namespace Dynamic_link_library
             }
 
             sp.Stop();
-            Utility.ElapseTime(sp, "Array Deletion");
+            Utility.ElapsedTime(sp, "Array Deletion");
             sp.Start();
             for (int i = 0; i < number; i++)
             {
@@ -99,14 +99,14 @@ namespace Dynamic_link_library
             }
 
             sp.Stop();
-            Utility.ElapseTime(sp, "Stack Deletion");
+            Utility.ElapsedTime(sp, "Stack Deletion");
             sp.Start();
             for (int i = 0; i < number; i++)
             {
                 myQueue.Dequeue();
             }
             sp.Stop();
-            Utility.ElapseTime(sp, "Queue Deletion");
+            Utility.ElapsedTime(sp, "Queue Deletion");
 
             sp.Start();
             for (int i = 0; i < number; i++)
@@ -114,7 +114,7 @@ namespace Dynamic_link_library
                 myHashSet.Remove(number);
             }
             sp.Stop();
-            Utility.ElapseTime(sp, "HashSet Deletion");
+            Utility.ElapsedTime(sp, "HashSet Deletion");
 
             sp.Start();
             for (int i = 0; i < number; i++)
@@ -122,7 +122,7 @@ namespace Dynamic_link_library
                 myList.Remove(number);
             }
             sp.Stop();
-            Utility.ElapseTime(sp, "List Deletion");
+            Utility.ElapsedTime(sp, "List Deletion");
 
             sp.Start();
             for (int i = 0; i < number; i++)
@@ -130,7 +130,7 @@ namespace Dynamic_link_library
                 mySortedDictionary.Remove(number);
             }
             sp.Stop();
-            Utility.ElapseTime(sp, "SortedDictionary Deletion");
+            Utility.ElapsedTime(sp, "SortedDictionary Deletion");
 
             sp.Start();
             for (int i = 0; i < number; i++)
@@ -138,7 +138,7 @@ namespace Dynamic_link_library
                 myDictionary.Remove(number);
             }
             sp.Stop();
-            Utility.ElapseTime(sp, "Dictionary Deletion");
+            Utility.ElapsedTime(sp, "Dictionary Deletion");
 
         }
         public void SearchElement(int number)
@@ -149,7 +149,7 @@ namespace Dynamic_link_library
                 myArray.Contains(number);
             }
             sp.Stop();
-            Utility.ElapseTime(sp, "Array Search");
+            Utility.ElapsedTime(sp, "Array Search");
 
             sp.Start();
             for (int i = 0; i < number; i++)
@@ -157,42 +157,42 @@ namespace Dynamic_link_library
                 myStack.Contains(number);
             }
             sp.Stop();
-            Utility.ElapseTime(sp, "Stack Search");
+            Utility.ElapsedTime(sp, "Stack Search");
             sp.Start();
             for (int i = 0; i < number; i++)
             {
                 myQueue.Contains(number);
             }
             sp.Stop();
-            Utility.ElapseTime(sp, "Queue Search");
+            Utility.ElapsedTime(sp, "Queue Search");
             sp.Start();
             for (int i = 0; i < number; i++)
             {
                 myHashSet.Contains(number);
             }
             sp.Stop();
-            Utility.ElapseTime(sp, "HashSet Search");
+            Utility.ElapsedTime(sp, "HashSet Search");
             sp.Start();
             for (int i = 0; i < number; i++)
             {
                 myList.Contains(number);
             }
             sp.Stop();
-            Utility.ElapseTime(sp, "List Search");
+            Utility.ElapsedTime(sp, "List Search");
             sp.Start();
             for (int i = 0; i < number; i++)
             {
                 myDictionary.ContainsValue(number);
             }
             sp.Stop();
-            Utility.ElapseTime(sp, "Dictionary Search");
+            Utility.ElapsedTime(sp, "Dictionary Search");
             sp.Start();
             for (int i = 0; i < number; i++)
             {
                 mySortedDictionary.ContainsValue(number);
             }
             sp.Stop();
-            Utility.ElapseTime(sp, "SortedDictionary Deletion");
+            Utility.ElapsedTime(sp, "SortedDictionary Deletion");
             sp.Start();
         }
         public void SearchByIndex(int index)
@@ -203,21 +203,21 @@ namespace Dynamic_link_library
                 myArray.ElementAt(index);
             }
             sp.Stop();
-            Utility.ElapseTime(sp, "Array SearchByIndex");
+            Utility.ElapsedTime(sp, "Array SearchByIndex");
             sp.Start();
             for (int i = 0; i < index; i++)
             {
                 myStack.ElementAt(index);
             }
             sp.Stop();
-            Utility.ElapseTime(sp, "Stack SearchByIndex");
+            Utility.ElapsedTime(sp, "Stack SearchByIndex");
             sp.Start();
             for (int i = 0; i < index; i++)
             {
                 myQueue.ElementAt(index);
             }
             sp.Stop();
-            Utility.ElapseTime(sp, "Queue SearchByIndex");
+            Utility.ElapsedTime(sp, "Queue SearchByIndex");
             sp.Start();
             for (int i = 0; i < index; i++)
             {
@@ -225,28 +225,28 @@ namespace Dynamic_link_library
                 myHashSet.ElementAt(index);
             }
             sp.Stop();
-            Utility.ElapseTime(sp, "HashSet SearchByIndex");
+            Utility.ElapsedTime(sp, "HashSet SearchByIndex");
             sp.Start();
             for (int i = 0; i < index; i++)
             {
                 myList.ElementAt(index);
             }
             sp.Stop();
-            Utility.ElapseTime(sp, "List SearchByIndex");
+            Utility.ElapsedTime(sp, "List SearchByIndex");
             sp.Start();
             for (int i = 0; i < index; i++)
             {
                 mySortedDictionary.ElementAt(index);
             }
             sp.Stop();
-            Utility.ElapseTime(sp, "SortedDictionary SearchByIndex");
+            Utility.ElapsedTime(sp, "SortedDictionary SearchByIndex");
             sp.Start();
             for (int i = 0; i < index; i++)
             {
                 myDictionary.ElementAt(index);
             }
             sp.Stop();
-            Utility.ElapseTime(sp, "Dictionary SearchByIndex");
+            Utility.ElapsedTime(sp, "Dictionary SearchByIndex");
         }
         public void PrepareForDSCompare(int size) // random generation of integers for different types of data structures
         {
