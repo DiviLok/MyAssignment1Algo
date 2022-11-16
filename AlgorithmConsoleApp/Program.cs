@@ -9,13 +9,14 @@ namespace AlgorithmConsoleApp
     {
         static void Main(string[] args)
         {
-            int size;
+            int arraySize;
+            
             int[] myArray;
-            PerformanceCompare pc = new PerformanceCompare();
+            
 
-            Console.WriteLine("Enter the array size");
-            size = Convert.ToInt32(Console.ReadLine());
-            myArray = SortAlgorithms.Prepare(size);
+            Console.WriteLine("Enter the original array size");
+            arraySize = Convert.ToInt32(Console.ReadLine());
+            myArray = SortAlgorithms.Prepare(arraySize);
 
             Console.WriteLine("\nChoose an option");
             Console.WriteLine("\n 1. Search the Array, 2. Sort the Array 3. PerformanceCompare");
@@ -29,19 +30,30 @@ namespace AlgorithmConsoleApp
                     SortAlgorithm(myArray);
                     break;
                case 3:
+                    PerformanceCompareDS(arraySize);
                     
-                    Console.WriteLine("The Comparision of Data Structures performance");
-                    pc.Randomaize1(size);
-                    pc.AddingElement(size);
-                    pc.RemovingElement(size);
-                    pc.SearchElement(size);
-                    pc.SearchByIndex(size);
                     break;
 
             }
             
 
 
+        }
+        public static void PerformanceCompareDS(int arraySize)
+        {
+            int arrayChangeSize;
+            PerformanceCompare pc = new PerformanceCompare();
+            Console.WriteLine("The Comparision of Data Structures performance");
+           
+            pc.PrepareForDSCompare(arraySize);
+            
+            Console.WriteLine("Enter the size of changes you want to test for compare");
+            
+            arrayChangeSize = Convert.ToInt32(Console.ReadLine());
+            pc.AddingElement(arrayChangeSize);
+            pc.RemovingElement(arrayChangeSize);
+            pc.SearchElement(arrayChangeSize);
+            pc.SearchByIndex(arrayChangeSize);
         }
         public static void SearchAlgorithm(int[] myArray)
         {

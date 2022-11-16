@@ -149,7 +149,7 @@ namespace Dynamic_link_library
                 myArray.Contains(number);
             }
             sp.Stop();
-            Utility.ElapseTime(sp, "Dictionary Deletion");
+            Utility.ElapseTime(sp, "Array Search");
 
             sp.Start();
             for (int i = 0; i < number; i++)
@@ -157,42 +157,42 @@ namespace Dynamic_link_library
                 myStack.Contains(number);
             }
             sp.Stop();
-            Utility.ElapseTime(sp, "Dictionary Deletion");
+            Utility.ElapseTime(sp, "Stack Search");
             sp.Start();
             for (int i = 0; i < number; i++)
             {
                 myQueue.Contains(number);
             }
             sp.Stop();
-            Utility.ElapseTime(sp, "Dictionary Deletion");
+            Utility.ElapseTime(sp, "Queue Search");
             sp.Start();
             for (int i = 0; i < number; i++)
             {
                 myHashSet.Contains(number);
             }
             sp.Stop();
-            Utility.ElapseTime(sp, "Dictionary Deletion");
+            Utility.ElapseTime(sp, "HashSet Search");
             sp.Start();
             for (int i = 0; i < number; i++)
             {
                 myList.Contains(number);
             }
             sp.Stop();
-            Utility.ElapseTime(sp, "Dictionary Deletion");
+            Utility.ElapseTime(sp, "List Search");
             sp.Start();
             for (int i = 0; i < number; i++)
             {
                 myDictionary.ContainsValue(number);
             }
             sp.Stop();
-            Utility.ElapseTime(sp, "Dictionary Deletion");
+            Utility.ElapseTime(sp, "Dictionary Search");
             sp.Start();
             for (int i = 0; i < number; i++)
             {
                 mySortedDictionary.ContainsValue(number);
             }
             sp.Stop();
-            Utility.ElapseTime(sp, "Dictionary Deletion");
+            Utility.ElapseTime(sp, "SortedDictionary Deletion");
             sp.Start();
         }
         public void SearchByIndex(int index)
@@ -203,21 +203,21 @@ namespace Dynamic_link_library
                 myArray.ElementAt(index);
             }
             sp.Stop();
-            Utility.ElapseTime(sp, "Dictionary Deletion");
+            Utility.ElapseTime(sp, "Array SearchByIndex");
             sp.Start();
             for (int i = 0; i < index; i++)
             {
                 myStack.ElementAt(index);
             }
             sp.Stop();
-            Utility.ElapseTime(sp, "Dictionary Deletion");
+            Utility.ElapseTime(sp, "Stack SearchByIndex");
             sp.Start();
             for (int i = 0; i < index; i++)
             {
                 myQueue.ElementAt(index);
             }
             sp.Stop();
-            Utility.ElapseTime(sp, "Dictionary Deletion");
+            Utility.ElapseTime(sp, "Queue SearchByIndex");
             sp.Start();
             for (int i = 0; i < index; i++)
             {
@@ -225,32 +225,32 @@ namespace Dynamic_link_library
                 myHashSet.ElementAt(index);
             }
             sp.Stop();
-            Utility.ElapseTime(sp, "Dictionary Deletion");
+            Utility.ElapseTime(sp, "HashSet SearchByIndex");
             sp.Start();
             for (int i = 0; i < index; i++)
             {
                 myList.ElementAt(index);
             }
             sp.Stop();
-            Utility.ElapseTime(sp, "Dictionary Deletion");
+            Utility.ElapseTime(sp, "List SearchByIndex");
             sp.Start();
             for (int i = 0; i < index; i++)
             {
                 mySortedDictionary.ElementAt(index);
             }
             sp.Stop();
-            Utility.ElapseTime(sp, "Dictionary Deletion");
+            Utility.ElapseTime(sp, "SortedDictionary SearchByIndex");
             sp.Start();
             for (int i = 0; i < index; i++)
             {
                 myDictionary.ElementAt(index);
             }
             sp.Stop();
-            Utility.ElapseTime(sp, "Dictionary Deletion");
+            Utility.ElapseTime(sp, "Dictionary SearchByIndex");
         }
-        public void Randomaize1(int size) // random generation of integers for different types of data structures
+        public void PrepareForDSCompare(int size) // random generation of integers for different types of data structures
         {
-            SortAlgorithms.Prepare(size);
+            myArray = new int[size];
             Random random1 = new Random();
             for (int i = 0; i < size; i++)
             {
