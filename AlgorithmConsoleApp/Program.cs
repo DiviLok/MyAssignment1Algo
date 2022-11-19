@@ -39,6 +39,9 @@ namespace AlgorithmConsoleApp
                 userinput= Console.ReadLine();
                 
             }
+            Console.WriteLine("Read Employees file");
+            Employees.ReadTextFile();
+            Employees.FilterEmployees();
 
         }
         public static void PerformanceCompareDS(int arraySize)
@@ -50,10 +53,11 @@ namespace AlgorithmConsoleApp
             pc.PrepareForDSCompare(arraySize);
             
             Console.WriteLine("Enter the size of changes you want to test for compare");
-            
-            arrayChangeSize = Convert.ToInt32(Console.ReadLine());
 
-            Console.WriteLine("\n### Comparing addition performance ###\n");
+            arrayChangeSize = Convert.ToInt32(Console.ReadLine());
+            PerformanceCompare.DisplayRuntime(arraySize, arrayChangeSize);
+
+            /*Console.WriteLine("\n### Comparing addition performance ###\n");
             pc.AddingElement(arrayChangeSize);
 
             Console.WriteLine("\n### Comparing deletion performance ###\n");
@@ -68,7 +72,7 @@ namespace AlgorithmConsoleApp
                 arrayChangeSize = arrayChangeSize - arraySize;
             }
             Console.WriteLine("\n### Comparing search by index performance ###\n");
-            pc.SearchByIndex(arrayChangeSize);
+            pc.SearchByIndex(arrayChangeSize);*/
         }
         public static void SearchAlgorithm(int[] myArray)
         {

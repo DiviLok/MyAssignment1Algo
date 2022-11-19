@@ -11,20 +11,64 @@ namespace Dynamic_link_library
 {
     public class PerformanceCompare
     {
-        int[] myArray;
-        Stack<int> myStack = new Stack<int>();
-        Queue<int> myQueue = new Queue<int>();
-        Dictionary<int, int> myDictionary = new Dictionary<int, int>();
-        List<int> myList = new List<int>();
-        SortedDictionary<int, int> mySortedDictionary = new SortedDictionary<int, int>();
-        HashSet<int> myHashSet = new HashSet<int>();
-        Random random2 = new Random();
-        Stopwatch sp = new Stopwatch();
+        static int[] myArray;
+        static Stack<int> myStack = new Stack<int>();
+        static Queue<int> myQueue = new Queue<int>();
+        static Dictionary<int, int> myDictionary = new Dictionary<int, int>();
+        static List<int> myList = new List<int>();
+        static SortedDictionary<int, int> mySortedDictionary = new SortedDictionary<int, int>();
+        static HashSet<int> myHashSet = new HashSet<int>();
+        static Random random2 = new Random();
+        static Stopwatch sp = new Stopwatch();
 
         public delegate void PerformanceComp(int i);
 
         //Adding number of elements 'n' based on user inputs
-        public void AddingElement(int number)
+
+        /*public static async void DisplayRuntime(int initialsize, int change)
+        {
+            await Task.Run(() =>
+            {
+                Console.WriteLine("\n### Comparing addition performance ###\n");
+                AddingElement(change);
+            });
+
+            Console.WriteLine("\n### Comparing deletion performance ###\n");
+            RemovingElement(change);
+
+            Console.WriteLine("\n### Comparing search by element performance ###\n");
+
+            SearchElement(change);
+
+            Console.WriteLine("\n### Comparing search by index performance ###\n");
+            // This will avoid index out of bound exception while searching by index
+            while (change > initialsize)
+            {
+                change = change - initialsize;
+            }
+            SearchByIndex(change);
+        }*/
+
+        public static void DisplayRuntime(int arraySize, int arrayChangeSize)
+        {
+            Console.WriteLine("\n### Comparing addition performance ###\n");
+            AddingElement(arrayChangeSize);
+
+            Console.WriteLine("\n### Comparing deletion performance ###\n");
+            RemovingElement(arrayChangeSize);
+
+            Console.WriteLine("\n### Comparing search by element performance ###\n");
+            SearchElement(arrayChangeSize);
+
+            // This will avoid index out of bound exception while searching by index
+            while (arrayChangeSize > arraySize)
+            {
+                arrayChangeSize = arrayChangeSize - arraySize;
+            }
+            Console.WriteLine("\n### Comparing search by index performance ###\n");
+            SearchByIndex(arrayChangeSize);
+        }
+        private static void AddingElement(int number)
         {
             Console.WriteLine("Length of Array Before Addition: " + myArray.Length);
             sp.Restart();
@@ -121,13 +165,13 @@ namespace Dynamic_link_library
         }
 
         //Deleting number of elements 'n' based on user inputs
-        public void RemovingElement(int number)
+        private static void RemovingElement(int number)
         {
             Console.WriteLine("Length of Array Before Deleting: " + myArray.Length);
             sp.Restart();
             //Source: https://stackoverflow.com/questions/496896/how-to-delete-an-element-from-an-array-in-c-sharp
             myArray = myArray.Where((source, index) => index >= number).ToArray();//delete the first n elements of the array using where clause
-            
+
             sp.Stop();
             Utility.ElapsedTime(sp, "Array Deletion");
             Console.WriteLine("Length of Array After Deleting: " + myArray.Length);
@@ -186,7 +230,7 @@ namespace Dynamic_link_library
 
             //capture keys as list in tempArray to use for deletion
             int[] tempArray = new int[number];
-            foreach(int y in mySortedDictionary.Keys)
+            foreach (int y in mySortedDictionary.Keys)
             {
                 tempArray[x++] = y;
                 if (x >= number) { break; }
@@ -205,10 +249,10 @@ namespace Dynamic_link_library
 
             //capture keys as list in tempArray to use for deletion
             int[] tempArray1 = new int[number];
-            foreach(int b in myDictionary.Keys)
+            foreach (int b in myDictionary.Keys)
             {
                 tempArray1[a++] = b;
-                if(a>= number) { break; }
+                if (a >= number) { break; }
             }
             foreach (int el in tempArray1)
             { myDictionary.Remove(el); }
@@ -219,7 +263,7 @@ namespace Dynamic_link_library
         }
 
         //Search 'n' number of elements based on user input
-        public void SearchElement(int number)
+        private static void SearchElement(int number)
         {
             sp.Restart();
             myArray.Contains(number);
@@ -230,43 +274,43 @@ namespace Dynamic_link_library
             myStack.Contains(number);
             sp.Stop();
             Utility.ElapsedTime(sp, "Stack Search");
-            
+
             sp.Restart();
             myQueue.Contains(number);
             sp.Stop();
             Utility.ElapsedTime(sp, "Queue Search");
-            
+
             sp.Restart();
             myHashSet.Contains(number);
             sp.Stop();
             Utility.ElapsedTime(sp, "HashSet Search");
-            
+
             sp.Restart();
             myList.Contains(number);
             sp.Stop();
             Utility.ElapsedTime(sp, "List Search");
-            
+
             sp.Restart();
             myDictionary.ContainsValue(number);
             sp.Stop();
             Utility.ElapsedTime(sp, "Dictionary Search");
-            
+
             sp.Restart();
             mySortedDictionary.ContainsValue(number);
             sp.Stop();
             Utility.ElapsedTime(sp, "SortedDictionary Search");
         }
-        public void SearchByIndex(int index)
+        private static void SearchByIndex(int index)
         {
             // Search a random index within the original array
             Random r = new Random();
-            int newIndex = r.Next(index-1);
+            int newIndex = r.Next(index - 1);
             sp.Restart();
 
             myArray.ElementAt(newIndex);
             sp.Stop();
             Utility.ElapsedTime(sp, "Array SearchByIndex");
-            
+
             sp.Restart();
             myStack.ElementAt(newIndex);
             sp.Stop();
@@ -276,22 +320,22 @@ namespace Dynamic_link_library
             myQueue.ElementAt(newIndex);
             sp.Stop();
             Utility.ElapsedTime(sp, "Queue SearchByIndex");
-            
+
             sp.Restart();
             myHashSet.ElementAt(newIndex);
             sp.Stop();
             Utility.ElapsedTime(sp, "HashSet SearchByIndex");
-            
+
             sp.Restart();
             myList.ElementAt(newIndex);
             sp.Stop();
             Utility.ElapsedTime(sp, "List SearchByIndex");
-            
+
             sp.Restart();
             mySortedDictionary.ElementAt(newIndex);
             sp.Stop();
             Utility.ElapsedTime(sp, "SortedDictionary SearchByIndex");
-            
+
             sp.Restart();
             myDictionary.ElementAt(newIndex);
             sp.Stop();
