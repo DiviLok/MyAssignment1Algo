@@ -10,8 +10,11 @@ namespace Dynamic_link_library
 {
     public class SearchAlgorithms
     {
+        
         public delegate int SearchDelegate1(int[] myArray, int num);
         public delegate int SearchDelegate2(int[] myArray, int num, int left, int right);
+
+        //create empty functions with same signature as delegate used as defaults to initialize delegate functions
         public static int DoNothing(int[] myArray, int num) { return 1; }
         public static int DoNothing(int[] myArray, int num, int left, int right) { return 1; }
         public static int LinearSearch(int[] myArray, int num)
@@ -45,11 +48,14 @@ namespace Dynamic_link_library
         {
             Stopwatch sp = new Stopwatch();
 
+            //Depending on user input use correct delegate method based on function name.
             if ("LinearSearch LambdaSearch".Contains(searchDele1.Method.Name))
             {
 
                 sp.Start();
-
+                //call LinearSearch via delegate pointer searchDele1
+                //array and the number which should be searched are sent as parameter
+                //here I am searching for first element in the array (array[0])
                 Console.WriteLine(searchDele1(array, array[0]));
 
                 sp.Stop();
@@ -58,6 +64,7 @@ namespace Dynamic_link_library
 
 
                 sp.Start();
+                //Linear Search for middle element in the array
                 Console.WriteLine(searchDele1(array, array[(array.Length) / 2]));
 
                 sp.Stop();

@@ -9,33 +9,36 @@ namespace AlgorithmConsoleApp
     {
         static void Main(string[] args)
         {
-            int arraySize;
-            
-            int[] myArray;
-            
-
+            int arraySize;            
+            int[] myArray;            
+            String userinput="y";
             Console.WriteLine("Enter the original array size");
             arraySize = Convert.ToInt32(Console.ReadLine());
-            myArray = SortAlgorithms.Prepare(arraySize);
-
-            Console.WriteLine("\nChoose an option");
-            Console.WriteLine("\n 1. Search the Array, 2. Sort the Array 3. PerformanceCompare");
-            int choice = Convert.ToInt16(Console.ReadLine());
-            switch (choice)
+            while (userinput =="y")
             {
-                case 1:
-                    SearchAlgorithm(myArray); //Calls the Search Algorithms function
-                    break;
-                case 2:
-                    SortAlgorithm(myArray); // calls the Sorting Algorithms function
-                    break;
-               case 3:
-                    PerformanceCompareDS(arraySize); // calls the performance compare function which compares performance of all the data structure types
-                    break;
+                
+                myArray = SortAlgorithms.Prepare(arraySize);
 
+                Console.WriteLine("\nChoose an option");
+                Console.WriteLine("\n 1. Search the Array, 2. Sort the Array 3. PerformanceCompare");
+                int choice = Convert.ToInt16(Console.ReadLine());
+                switch (choice)
+                {
+                    case 1:
+                        SearchAlgorithm(myArray); //Calls the Search Algorithms function
+                        break;
+                    case 2:
+                        SortAlgorithm(myArray); // calls the Sorting Algorithms function
+                        break;
+                    case 3:
+                        PerformanceCompareDS(arraySize); // calls the performance compare function which compares performance of all the data structure types
+                        break;
+
+                }
+                Console.WriteLine("Type 'y' if you want to continue, any other button to exit");
+                userinput= Console.ReadLine();
+                
             }
-            
-
 
         }
         public static void PerformanceCompareDS(int arraySize)
@@ -50,9 +53,21 @@ namespace AlgorithmConsoleApp
             
             arrayChangeSize = Convert.ToInt32(Console.ReadLine());
 
+            Console.WriteLine("\n### Comparing addition performance ###\n");
             pc.AddingElement(arrayChangeSize);
+
+            Console.WriteLine("\n### Comparing deletion performance ###\n");
             pc.RemovingElement(arrayChangeSize);
+
+            Console.WriteLine("\n### Comparing search by element performance ###\n");
             pc.SearchElement(arrayChangeSize);
+
+            // This will avoid index out of bound exception while searching by index
+            while (arrayChangeSize > arraySize)
+            {
+                arrayChangeSize = arrayChangeSize - arraySize;
+            }
+            Console.WriteLine("\n### Comparing search by index performance ###\n");
             pc.SearchByIndex(arrayChangeSize);
         }
         public static void SearchAlgorithm(int[] myArray)
@@ -78,10 +93,10 @@ namespace AlgorithmConsoleApp
 
             }
             SearchAlgorithms.DisplayRuntime(myArray, searchDele1, searchDele2);
-
         }
         public static void SortAlgorithm(int[] myArray)
         {
+
             
             Console.WriteLine("\nWhat sort method do you want to use? Choose a number:");
             Console.WriteLine("\n1. Bubble, 2. Merge, 3. Selection, 4. Insert, 5. Lambda, 6. QuickSort");
@@ -89,7 +104,7 @@ namespace AlgorithmConsoleApp
             int sortSelection = Convert.ToInt32(Console.ReadLine());
             SortedDelegate1 sortDele1 = DoNothing;
             SortedDelegate2 sortDele2 = DoNothing;
-
+            
             switch (sortSelection)
             {
                 case 1:

@@ -8,7 +8,7 @@ namespace Dynamic_link_library
         public delegate void SortedDelegate1(int[] myArray);
 
         public delegate void SortedDelegate2(int[] myArray, int x, int y);
-        public static void Swap(int[] myArray, int i, int j)
+        private static void Swap(int[] myArray, int i, int j)
         {
             int temp;
             temp = myArray[i];
@@ -16,9 +16,12 @@ namespace Dynamic_link_library
             myArray[j] = temp;
 
         }
+        //create empty functions with same signature as delegate used as defaults to initialize delegate functions
         public static void DoNothing(int[] myArray) { }
         public static void DoNothing(int[] myArray, int x, int y) { }
-        public static int[] Randomize(int[] myArray)
+
+        //Source: Full Stack Algorithm class
+        private static int[] Randomize(int[] myArray)
         {
             Random random = new Random();
             for (int i = 0; i < myArray.Length; i++)
@@ -28,6 +31,9 @@ namespace Dynamic_link_library
             }
             return myArray;
         }
+
+        //Source: Full Stack Algorithm class
+
         public static int[] Prepare(int arraySize)
         {
             int[] myArray = new int[arraySize];
@@ -116,7 +122,7 @@ namespace Dynamic_link_library
             }
 
         }
-        public static void Mergemethod(int[] myArray, int left, int mid, int right)
+        private static void Mergemethod(int[] myArray, int left, int mid, int right)
         {
             int[] temp = new int[myArray.Length];    // temp is a temporary array to store result
             int i, left_end, num_elements, tmp_pos;
@@ -136,63 +142,53 @@ namespace Dynamic_link_library
             {
                 myArray[right] = temp[right]; right--;
             }
+            /*Console.WriteLine("Sorting now: \n");
+            Console.WriteLine("[{0}]", string.Join(", ", myArray));*/
 
         }
         public static void SortbyLambda(int[] myArray, int x, int y)
         {
             Array.Sort(myArray, (x, y) => x.CompareTo(y));
         }
-        public static int Partition(int[] myArray, int left, int right)
+
+        //Source: https://www.geeksforgeeks.org/quick-sort/?ref=gcse
+        private static int Partition(int[] myArray, int left, int right)
         {
+            // pivot (Element to be placed at right position)
+           int pivot = myArray[right];
 
-            int pivot = myArray[left];
-            while (true)
+            int i = (left - 1); // Index of smaller element and indicates the 
+         // right position of pivot found so far
+
+        for (int j = left; j <= right-1; j++)
             {
-                while (myArray[left] < pivot)
-                    left++;
 
-                while (myArray[right] > pivot)
-                    right--;
-                if (left < right)
+                // If current element is smaller than the pivot
+                if (myArray[j] < pivot)
                 {
-                    Swap(myArray, left, right);
+                    i++;    // increment index of smaller element
+                    Swap(myArray,i,j);
                 }
-                else
-                {
-                    return right;
-                }
-
             }
-
+            Swap(myArray,i + 1, right);
+        return (i + 1);
         }
+
         public static void QuickSort(int[] myArray, int left, int right)
-
         {
-
-            // For Recusrion  
-
             if (left < right)
-
             {
 
-                int pivot = Partition(myArray, left, right);
+                /* pi is partitioning index, arr[pi] is now at right place */
 
+              int  pi = Partition(myArray, left, right);
 
+                QuickSort(myArray, left, pi-1);  // Before pi
 
-                if (pivot > 1)
-
-                    QuickSort(myArray, left, pivot - 1);
-
-
-
-                if (pivot + 1 < right)
-
-                    QuickSort(myArray, pivot + 1, right);
+                QuickSort(myArray, pi + 1, right); // After pi
 
             }
-
-
         }
-
+        
     }
 }
