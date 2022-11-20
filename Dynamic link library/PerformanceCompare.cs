@@ -25,7 +25,7 @@ namespace Dynamic_link_library
 
         //Adding number of elements 'n' based on user inputs
 
-        /*public static async void DisplayRuntime(int initialsize, int change)
+        public static async void DisplayRuntime(int initialsize, int change)
         {
             await Task.Run(() =>
             {
@@ -47,9 +47,9 @@ namespace Dynamic_link_library
                 change = change - initialsize;
             }
             SearchByIndex(change);
-        }*/
+        }
 
-        public static void DisplayRuntime(int arraySize, int arrayChangeSize)
+       /* public static void DisplayRuntime(int arraySize, int arrayChangeSize)
         {
             Console.WriteLine("\n### Comparing addition performance ###\n");
             AddingElement(arrayChangeSize);
@@ -67,7 +67,7 @@ namespace Dynamic_link_library
             }
             Console.WriteLine("\n### Comparing search by index performance ###\n");
             SearchByIndex(arrayChangeSize);
-        }
+        }*/
         private static void AddingElement(int number)
         {
             Console.WriteLine("Length of Array Before Addition: " + myArray.Length);
@@ -129,7 +129,7 @@ namespace Dynamic_link_library
             Console.WriteLine("Length of List Before Addition: " + myList.Count);
 
             Console.WriteLine("Length of Dictionary Before Addition: " + myDictionary.Count);
-            int r;
+           // int r;
             sp.Restart();
             for (int i = 0; i < number; i++)
             {

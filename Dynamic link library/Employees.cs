@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,35 +9,49 @@ namespace Dynamic_link_library
 {
     public class Employees
     {
-        public static void ReadTextFile()
+        String name;
+        String occupation;
+        int experience;
+        static List<Employees> employeeInfo = new List<Employees>();
+        public static void ReadEmployeeTextFile(string path)
         {
             
-           string[] lines = System.IO.File.ReadAllLines(@"C:\Users\lokes\OneDrive\UW-studies\Full-Stack\Assignment1\Employees.txt");
+            Console.WriteLine(path);
 
-            System.Console.WriteLine("Contents of Employees.txt = ");
-            foreach (string line in lines)
+            var lines = System.IO.File.ReadAllLines(path);
+            //System.IO.File.ReadAllLines(@"C:\Users\lokes\OneDrive\UW-studies\Full-Stack\Assignment1\AlgoAssignment\Dynamic link library\Dynamic link library\Employee.txt");
+            foreach (var l in lines)
             {
-                // Use a tab to indent each line of the file.
-                Console.WriteLine("\t" + line);
+                var tempArray = l.Split('|');
+                employeeInfo.Add(new Employees { name = tempArray[0], occupation = tempArray[1], experience = Convert.ToInt16(tempArray[2]) });
             }
-
-           /* Console.WriteLine("Press any key to exit.");
-            System.Console.ReadKey();*/
+            
         }
         public static void FilterEmployees()
         {
-            string[] words = System.IO.File.ReadAllLines(@"C:\Users\lokes\OneDrive\UW-studies\Full-Stack\Assignment1\Employees.txt");
-
-            IEnumerable<string> query = from word in words
-                                        where word.Contains("an") 
-                                        select word;
-
-            foreach (string str in query)
-                Console.WriteLine(str);
+            IEnumerable<Employees> emps = employeeInfo.Where(x => x.name.Contains("an"));
+            Console.WriteLine();
+            Console.WriteLine("## Filtering Employee name with 'an' in their name");
+            foreach (Employees emp in emps)
+                Console.WriteLine(emp.name + " " + emp.occupation + " " +emp.experience);
         }
-        public static void MapTheFile()
+        public static void GetEmployeeNameUsingMap()
         {
-            string[] file = System.IO.File.ReadAllLines(@"C:\Users\lokes\OneDrive\UW-studies\Full-Stack\Assignment1\Employees.txt");
+            IEnumerable<string> names = employeeInfo.Select(x => x.name);
+            Console.WriteLine();
+            Console.WriteLine("## Getting employee names using map");
+            foreach (var name in names)
+                Console.WriteLine(name);
+                  
         }
+        public static void GetSumOfExperienceUsingReduce()
+        {
+            int sumOfExperience = employeeInfo.Select(x =>x.experience).Sum();
+            Console.WriteLine();
+            Console.WriteLine("## Sum of Employee Experience using Reduce ");
+            Console.WriteLine(sumOfExperience);
+
+        }
+
     }
 }

@@ -12,15 +12,17 @@ namespace AlgorithmConsoleApp
             int arraySize;            
             int[] myArray;            
             String userinput="y";
-            Console.WriteLine("Enter the original array size");
-            arraySize = Convert.ToInt32(Console.ReadLine());
+            
             while (userinput =="y")
             {
-                
+                Console.WriteLine("Enter the original array size");
+                arraySize = Convert.ToInt32(Console.ReadLine());
                 myArray = SortAlgorithms.Prepare(arraySize);
 
                 Console.WriteLine("\nChoose an option");
-                Console.WriteLine("\n 1. Search the Array, 2. Sort the Array 3. PerformanceCompare");
+                Console.WriteLine("\n 1. Search the Array, 2. Sort the Array 3. PerformanceCompare 4. Read Employee Info from File");
+                
+
                 int choice = Convert.ToInt16(Console.ReadLine());
                 switch (choice)
                 {
@@ -33,15 +35,18 @@ namespace AlgorithmConsoleApp
                     case 3:
                         PerformanceCompareDS(arraySize); // calls the performance compare function which compares performance of all the data structure types
                         break;
+                   case 4:
+                        ReadEmployeeInfofromFile();
+                        break;
 
                 }
-                Console.WriteLine("Type 'y' if you want to continue, any other button to exit");
+                Console.WriteLine("#### Program Complete. ####\n\n");
+
+                Console.WriteLine("Type 'y' if you want to rerun the program, any other button to exit");
                 userinput= Console.ReadLine();
                 
             }
-            Console.WriteLine("Read Employees file");
-            Employees.ReadTextFile();
-            Employees.FilterEmployees();
+      
 
         }
         public static void PerformanceCompareDS(int arraySize)
@@ -132,6 +137,14 @@ namespace AlgorithmConsoleApp
             }
             SortAlgorithms.DisplayRuntime(myArray, sortDele1, sortDele2);
 
+        }
+        public static void ReadEmployeeInfofromFile()
+        {
+            Console.WriteLine("Read Employees file");
+            Employees.ReadEmployeeTextFile(Resource1.EmployeeFile);
+            Employees.FilterEmployees();
+            Employees.GetEmployeeNameUsingMap();
+            Employees.GetSumOfExperienceUsingReduce();
         }
     }
 }

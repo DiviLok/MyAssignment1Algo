@@ -148,7 +148,8 @@ namespace Dynamic_link_library
         }
         public static void SortbyLambda(int[] myArray, int x, int y)
         {
-            Array.Sort(myArray, (x, y) => x.CompareTo(y));
+            // Source: https://stackoverflow.com/questions/30404149/array-sort-into-a-new-array
+            var result = myArray.OrderBy(x => x).ToArray();
         }
 
         //Source: https://www.geeksforgeeks.org/quick-sort/?ref=gcse
