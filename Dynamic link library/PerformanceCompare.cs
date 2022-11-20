@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,89 +11,173 @@ namespace Dynamic_link_library
 {
     public class PerformanceCompare
     {
-        int[] myArray;
-        Stack<int> myStack = new Stack<int>();
-        Queue<int> myQueue = new Queue<int>();
-        Dictionary<int, int> myDictionary = new Dictionary<int, int>();
-        List<int> myList = new List<int>();
-        SortedDictionary<int, int> mySortedDictionary = new SortedDictionary<int, int>();
-        HashSet<int> myHashSet = new HashSet<int>();
-        Random random2 = new Random();
-        Stopwatch sp = new Stopwatch();
+        static int[] myArray;
+        static Stack<int> myStack = new Stack<int>();
+        static Queue<int> myQueue = new Queue<int>();
+        static Dictionary<int, int> myDictionary = new Dictionary<int, int>();
+        static List<int> myList = new List<int>();
+        static SortedDictionary<int, int> mySortedDictionary = new SortedDictionary<int, int>();
+        static HashSet<int> myHashSet = new HashSet<int>();
+        static Random random2 = new Random();
+        static Stopwatch sp = new Stopwatch();
 
         public delegate void PerformanceComp(int i);
-        public void AddingElement(int number)
+
+        //Adding number of elements 'n' based on user inputs
+
+        public static async void DisplayRuntime(int initialsize, int change)
         {
+            await Task.Run(() =>
+            {
+                Console.WriteLine("\n### Comparing addition performance ###\n");
+                AddingElement(change);
+            });
 
-            sp.Start();
+            Console.WriteLine("\n### Comparing deletion performance ###\n");
+            RemovingElement(change);
 
+            Console.WriteLine("\n### Comparing search by element performance ###\n");
+
+            SearchElement(change);
+
+            Console.WriteLine("\n### Comparing search by index performance ###\n");
+            // This will avoid index out of bound exception while searching by index
+            while (change > initialsize)
+            {
+                change = change - initialsize;
+            }
+            SearchByIndex(change);
+        }
+
+       /* public static void DisplayRuntime(int arraySize, int arrayChangeSize)
+        {
+            Console.WriteLine("\n### Comparing addition performance ###\n");
+            AddingElement(arrayChangeSize);
+
+            Console.WriteLine("\n### Comparing deletion performance ###\n");
+            RemovingElement(arrayChangeSize);
+
+            Console.WriteLine("\n### Comparing search by element performance ###\n");
+            SearchElement(arrayChangeSize);
+
+            // This will avoid index out of bound exception while searching by index
+            while (arrayChangeSize > arraySize)
+            {
+                arrayChangeSize = arrayChangeSize - arraySize;
+            }
+            Console.WriteLine("\n### Comparing search by index performance ###\n");
+            SearchByIndex(arrayChangeSize);
+        }*/
+        private static void AddingElement(int number)
+        {
+            Console.WriteLine("Length of Array Before Addition: " + myArray.Length);
+            sp.Restart();
+            Array.Resize(ref myArray, myArray.Length + number);//Resizing the array to add new elements to the original array
             for (int i = 0; i < number; i++)
             {
                 myArray.Append(random2.Next(0, 10 * number));
             }
             sp.Stop();
             Utility.ElapsedTime(sp, "Array Addition");
+            Console.WriteLine("Length of Array After Addition: " + myArray.Length);
 
-            sp.Start();
+            Console.WriteLine("Length of Stack Before Addition: " + myStack.Count);
+            sp.Restart();
             for (int i = 0; i < number; i++)
             {
                 myStack.Push(random2.Next(0, 10 * number));
             }
             sp.Stop();
             Utility.ElapsedTime(sp, "Stack Addition");
+            Console.WriteLine("Length of Stack After Addition: " + myStack.Count);
 
-            sp.Start();
+            Console.WriteLine("Length of Queue Before Addition: " + myQueue.Count);
+            sp.Restart();
             for (int i = 0; i < number; i++)
             {
                 myQueue.Enqueue(random2.Next(0, 10 * number));
             }
             sp.Stop();
             Utility.ElapsedTime(sp, "Queue Addition");
+            Console.WriteLine("Length of Queue Before Addition: " + myQueue.Count);
 
-            sp.Start();
+            Console.WriteLine("Length of Hashset Before Addition: " + myHashSet.Count);
+            sp.Restart();
+
+            // Ensure hashset reaches desired size by using unique elements
             for (int i = 0; i < number; i++)
             {
-                myHashSet.Add(random2.Next(0, 10 * number));
+                int rHash = random2.Next(0, 10 * number);
+                while (myHashSet.Contains(rHash))
+                {
+                    rHash = random2.Next(0, 10 * number);
+                }
+                myHashSet.Add(rHash);
             }
             sp.Stop();
             Utility.ElapsedTime(sp, "HashSet Addition");
+            Console.WriteLine("Length of Hashset After Addition: " + myHashSet.Count);
 
-            sp.Start();
+            Console.WriteLine("Length of List Before Addition: " + myList.Count);
+            sp.Restart();
             for (int i = 0; i < number; i++)
             {
                 myList.Add(random2.Next(0, 10 * number));
             }
             sp.Stop();
             Utility.ElapsedTime(sp, "List Addition");
+            Console.WriteLine("Length of List Before Addition: " + myList.Count);
 
-            sp.Start();
+            Console.WriteLine("Length of Dictionary Before Addition: " + myDictionary.Count);
+           // int r;
+            sp.Restart();
             for (int i = 0; i < number; i++)
             {
-                myDictionary.Add(myDictionary.Count, random2.Next(0, 10 * number));
+                // Ensure Dictionary keys are unique by making sure the key does not already exist
+                int rDict = random2.Next(0, 10 * number);
+                while (myDictionary.ContainsKey(rDict))
+                {
+                    rDict = random2.Next(0, 10 * number);
+                }
+                myDictionary.Add(rDict, rDict);
             }
             sp.Stop();
             Utility.ElapsedTime(sp, "Dictionary Addition");
+            Console.WriteLine("Length of Dictionary After Addition: " + myDictionary.Count);
 
-            sp.Start();
+            Console.WriteLine("Length of SortedDictionary Before Addition: " + myDictionary.Count);
+
+            sp.Restart();
             for (int i = 0; i < number; i++)
             {
-                mySortedDictionary.Add(mySortedDictionary.Count, random2.Next(0, 10 * number));
+                int rSDict = random2.Next(0, 10 * number);
+                // Ensure Dictionary keys are unique by making sure the key does not already exist
+                while (mySortedDictionary.ContainsKey(rSDict))
+                {
+                    rSDict = random2.Next(0, 10 * number);
+                }
+                mySortedDictionary.Add(rSDict, rSDict);
             }
             sp.Stop();
             Utility.ElapsedTime(sp, "SortedDictionary Addition");
+            Console.WriteLine("Length of SortedDictionary After Addition: " + mySortedDictionary.Count);
 
         }
-        public void RemovingElement(int number)
+
+        //Deleting number of elements 'n' based on user inputs
+        private static void RemovingElement(int number)
         {
-            sp.Start();
-            for (int i = 0; i < number; i++)
-            {
-                myArray.ElementAt(number);
-            }
+            Console.WriteLine("Length of Array Before Deleting: " + myArray.Length);
+            sp.Restart();
+            //Source: https://stackoverflow.com/questions/496896/how-to-delete-an-element-from-an-array-in-c-sharp
+            myArray = myArray.Where((source, index) => index >= number).ToArray();//delete the first n elements of the array using where clause
 
             sp.Stop();
             Utility.ElapsedTime(sp, "Array Deletion");
-            sp.Start();
+            Console.WriteLine("Length of Array After Deleting: " + myArray.Length);
+
+            Console.WriteLine("Length of Stack Before Deleting: " + myStack.Count);
+            sp.Restart();
             for (int i = 0; i < number; i++)
             {
                 myStack.Pop();
@@ -100,151 +185,159 @@ namespace Dynamic_link_library
 
             sp.Stop();
             Utility.ElapsedTime(sp, "Stack Deletion");
-            sp.Start();
+            Console.WriteLine("Length of Stack After Deleting: " + myStack.Count);
+
+            Console.WriteLine("Length of Queue Before Deleting: " + myQueue.Count);
+            sp.Restart();
             for (int i = 0; i < number; i++)
             {
                 myQueue.Dequeue();
             }
             sp.Stop();
             Utility.ElapsedTime(sp, "Queue Deletion");
+            Console.WriteLine("Length of Queue After Deleting: " + myQueue.Count);
 
-            sp.Start();
-            for (int i = 0; i < number; i++)
+            Console.WriteLine("Length of Hashset Before Deleting: " + myHashSet.Count);
+            sp.Restart();
+
+            int h = 0;
+            foreach (int j in myHashSet)
             {
-                myHashSet.Remove(number);
+                myHashSet.Remove(j);
+                h++;
+                if (h >= number)
+                {
+                    break;
+                }
             }
             sp.Stop();
             Utility.ElapsedTime(sp, "HashSet Deletion");
+            Console.WriteLine("Length of Hashset After Deleting: " + myHashSet.Count);
 
-            sp.Start();
+            Console.WriteLine("Length of List Before Deleting: " + myList.Count);
+            sp.Restart();
             for (int i = 0; i < number; i++)
             {
-                myList.Remove(number);
+                myList.RemoveAt(i);
             }
             sp.Stop();
             Utility.ElapsedTime(sp, "List Deletion");
+            Console.WriteLine("Length of List After Deleting: " + myList.Count);
 
-            sp.Start();
-            for (int i = 0; i < number; i++)
+            Console.WriteLine("Length of SortedDictionary Before Deleting: " + mySortedDictionary.Count);
+            sp.Restart();
+            int x = 0;
+
+            //capture keys as list in tempArray to use for deletion
+            int[] tempArray = new int[number];
+            foreach (int y in mySortedDictionary.Keys)
             {
-                mySortedDictionary.Remove(number);
+                tempArray[x++] = y;
+                if (x >= number) { break; }
+            }
+            foreach (int el in tempArray)
+            {
+                mySortedDictionary.Remove(el);
             }
             sp.Stop();
             Utility.ElapsedTime(sp, "SortedDictionary Deletion");
+            Console.WriteLine("Length of SortedDictionary After Deleting: " + mySortedDictionary.Count);
 
-            sp.Start();
-            for (int i = 0; i < number; i++)
+            Console.WriteLine("Length of Dictionary Before deleting: " + myDictionary.Count);
+            sp.Restart();
+            int a = 0;
+
+            //capture keys as list in tempArray to use for deletion
+            int[] tempArray1 = new int[number];
+            foreach (int b in myDictionary.Keys)
             {
-                myDictionary.Remove(number);
+                tempArray1[a++] = b;
+                if (a >= number) { break; }
             }
+            foreach (int el in tempArray1)
+            { myDictionary.Remove(el); }
             sp.Stop();
             Utility.ElapsedTime(sp, "Dictionary Deletion");
+            Console.WriteLine("Length of Dictionary After deleting: " + myDictionary.Count);
 
         }
-        public void SearchElement(int number)
+
+        //Search 'n' number of elements based on user input
+        private static void SearchElement(int number)
         {
-            sp.Start();
-            for (int i = 0; i < number; i++)
-            {
-                myArray.Contains(number);
-            }
+            sp.Restart();
+            myArray.Contains(number);
             sp.Stop();
             Utility.ElapsedTime(sp, "Array Search");
 
-            sp.Start();
-            for (int i = 0; i < number; i++)
-            {
-                myStack.Contains(number);
-            }
+            sp.Restart();
+            myStack.Contains(number);
             sp.Stop();
             Utility.ElapsedTime(sp, "Stack Search");
-            sp.Start();
-            for (int i = 0; i < number; i++)
-            {
-                myQueue.Contains(number);
-            }
+
+            sp.Restart();
+            myQueue.Contains(number);
             sp.Stop();
             Utility.ElapsedTime(sp, "Queue Search");
-            sp.Start();
-            for (int i = 0; i < number; i++)
-            {
-                myHashSet.Contains(number);
-            }
+
+            sp.Restart();
+            myHashSet.Contains(number);
             sp.Stop();
             Utility.ElapsedTime(sp, "HashSet Search");
-            sp.Start();
-            for (int i = 0; i < number; i++)
-            {
-                myList.Contains(number);
-            }
+
+            sp.Restart();
+            myList.Contains(number);
             sp.Stop();
             Utility.ElapsedTime(sp, "List Search");
-            sp.Start();
-            for (int i = 0; i < number; i++)
-            {
-                myDictionary.ContainsValue(number);
-            }
+
+            sp.Restart();
+            myDictionary.ContainsValue(number);
             sp.Stop();
             Utility.ElapsedTime(sp, "Dictionary Search");
-            sp.Start();
-            for (int i = 0; i < number; i++)
-            {
-                mySortedDictionary.ContainsValue(number);
-            }
+
+            sp.Restart();
+            mySortedDictionary.ContainsValue(number);
             sp.Stop();
-            Utility.ElapsedTime(sp, "SortedDictionary Deletion");
-            sp.Start();
+            Utility.ElapsedTime(sp, "SortedDictionary Search");
         }
-        public void SearchByIndex(int index)
+        private static void SearchByIndex(int index)
         {
-            sp.Start();
-            for (int i = 0; i < index; i++)
-            {
-                myArray.ElementAt(index);
-            }
+            // Search a random index within the original array
+            Random r = new Random();
+            int newIndex = r.Next(index - 1);
+            sp.Restart();
+
+            myArray.ElementAt(newIndex);
             sp.Stop();
             Utility.ElapsedTime(sp, "Array SearchByIndex");
-            sp.Start();
-            for (int i = 0; i < index; i++)
-            {
-                myStack.ElementAt(index);
-            }
+
+            sp.Restart();
+            myStack.ElementAt(newIndex);
             sp.Stop();
             Utility.ElapsedTime(sp, "Stack SearchByIndex");
-            sp.Start();
-            for (int i = 0; i < index; i++)
-            {
-                myQueue.ElementAt(index);
-            }
+
+            sp.Restart();
+            myQueue.ElementAt(newIndex);
             sp.Stop();
             Utility.ElapsedTime(sp, "Queue SearchByIndex");
-            sp.Start();
-            for (int i = 0; i < index; i++)
-            {
 
-                myHashSet.ElementAt(index);
-            }
+            sp.Restart();
+            myHashSet.ElementAt(newIndex);
             sp.Stop();
             Utility.ElapsedTime(sp, "HashSet SearchByIndex");
-            sp.Start();
-            for (int i = 0; i < index; i++)
-            {
-                myList.ElementAt(index);
-            }
+
+            sp.Restart();
+            myList.ElementAt(newIndex);
             sp.Stop();
             Utility.ElapsedTime(sp, "List SearchByIndex");
-            sp.Start();
-            for (int i = 0; i < index; i++)
-            {
-                mySortedDictionary.ElementAt(index);
-            }
+
+            sp.Restart();
+            mySortedDictionary.ElementAt(newIndex);
             sp.Stop();
             Utility.ElapsedTime(sp, "SortedDictionary SearchByIndex");
-            sp.Start();
-            for (int i = 0; i < index; i++)
-            {
-                myDictionary.ElementAt(index);
-            }
+
+            sp.Restart();
+            myDictionary.ElementAt(newIndex);
             sp.Stop();
             Utility.ElapsedTime(sp, "Dictionary SearchByIndex");
         }
@@ -255,14 +348,23 @@ namespace Dynamic_link_library
             for (int i = 0; i < size; i++)
             {
                 int r = random1.Next(0, 10 * size);
-                
+
                 myArray[i] = r;
                 myStack.Push(r);
                 myQueue.Enqueue(r);
                 myList.Add(r);
-                myDictionary.Add(i, r);
-                mySortedDictionary.Add(i, r);
-                myHashSet.Add(i);
+
+                // Check hashset to ensure the random number does not exist
+                // Loop until we get a unique random number
+                // Use this unique random number for dict and sorted dict
+                while (myHashSet.Contains(r))
+                {
+                    r = random1.Next(0, 10 * size);
+                }
+                myHashSet.Add(r);
+                myDictionary.Add(r, r);
+                mySortedDictionary.Add(r, r);
+
 
             }
         }
